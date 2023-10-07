@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                BigInt    @id @default(autoincrement())
+  discordId         String    @unique
+  paymentCredential String
+  paymentMethod     String
+  Laporan           Laporan[]
+}
+
+model Series {
+  id            BigInt          @id @default(autoincrement())
+  discordId     String          @unique
+  nama          String
+  singkatan     String
+  Laporan       Laporan[]
+  PaymentAmount PaymentAmount[]
+}
+
+model Laporan {
+  id           BigInt        @id @default(autoincrement())
+  chapter      String
+  status       LaporanStatus
+  paymentDone  Boolean       @default(false)
+  seriesId     BigInt
+  userId       BigInt
+  laporanJobId BigInt
+  laporanJob   LaporanJob    @relation(fields: [laporanJobId], references: [id])
+  user         User          @relation(fields: [userId], references: [id])
+  series       Series        @relation(fields: [seriesId], references: [id])
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model PaymentAmount {
+  id           BigInt     @id @default(autoincrement())
+  laporanJobId BigInt
+  seriesId     BigInt
+  laporanJob   LaporanJob @relation(fields: [laporanJobId], references: [id])
+  series       Series     @relation(fields: [seriesId], references: [id])
+}
+
+model LaporanJob {
+  id            BigInt          @id @default(autoincrement())
+  nama          String
+  Laporan       Laporan[]
+  PaymentAmount PaymentAmount[]
+}
+
+enum LaporanStatus {
+  DONE
+  PROSES
+  HOLD
+}

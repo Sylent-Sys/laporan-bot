@@ -7,6 +7,11 @@
   "scripts": {
     "start": "",
     "start:dev": "nodemon --exec tsx src/index.ts",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:reset": "prisma migrate reset",
+    "migrate:deploy": "prisma migrate deploy",
+    "migrate:status": "prisma migrate status",
+    "migrate:seed": "tsx prisma/seed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,12 +20,14 @@
   "devDependencies": {
     "@types/node": "^20.8.2",
     "nodemon": "^3.0.1",
+    "prisma": "^5.4.1",
     "tslib": "^2.6.2",
     "tsx": "^3.13.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "@discordx/importer": "^1.2.3",
+    "@prisma/client": "5.4.1",
     "discord.js": "^14.13.0",
     "discordx": "^11.7.6",
     "dotenv": "^16.3.1"

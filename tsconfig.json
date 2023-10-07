@@ -2,8 +2,6 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "outDir": "./build",
-    "rootDir": "./src",
     "strict": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
