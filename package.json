@@ -1,0 +1,28 @@
+{
+  "name": "laporan-bot",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "",
+    "start:dev": "nodemon --exec tsx src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.8.2",
+    "nodemon": "^3.0.1",
+    "tslib": "^2.6.2",
+    "tsx": "^3.13.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@discordx/importer": "^1.2.3",
+    "discord.js": "^14.13.0",
+    "discordx": "^11.7.6",
+    "dotenv": "^16.3.1"
+  }
+}
