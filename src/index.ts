@@ -3,6 +3,7 @@ import type { Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import EnvService from "./services/env.service";
+import app from "./server";
 
 export const bot = new Client({
     botGuilds: [(client) => client.guilds.cache.map((guild) => guild.id)],
@@ -43,6 +44,9 @@ async function run() {
         throw Error("Could not find BOT_TOKEN in your environment");
     }
     await bot.login(EnvService.get('BOT_TOKEN') ?? "");
+    app.listen(EnvService.get('PORT') ?? 3000, () => {
+        console.log("Server is running on port 3000");
+    })
 }
 
 run();
