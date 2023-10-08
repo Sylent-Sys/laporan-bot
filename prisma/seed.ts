@@ -7,7 +7,10 @@ async function main() {
     await prisma.laporanJob.createMany({
         data: [
             {
-                nama: "TL"
+                nama: "ETL"
+            },
+            {
+                nama: "KTL"
             },
             {
                 nama: "ED"
