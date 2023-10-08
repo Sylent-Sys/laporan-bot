@@ -21,9 +21,9 @@ export class Laporan {
         @SlashOption({
             name: "chapter",
             required: true,
-            type: ApplicationCommandOptionType.String,
+            type: ApplicationCommandOptionType.Integer,
             description: "Chapter",
-        }) chapter: string,
+        }) chapter: number,
         @SlashOption({
             name: "jobs",
             required: true,
@@ -53,13 +53,13 @@ export class Laporan {
             if (await this.laporanService.add({
                 tagSeries,
                 jobs,
-                chapter,
+                chapter: chapter.toString(),
                 discordId: interaction.user.id,
                 status: status as LaporanStatus
             }) == false) {
                 return await interaction.reply("Job yang anda tulis tidak terdaftar");
             }
-            return await interaction.reply("Sukses Membuat Laporan");
+            return await interaction.reply("Laporan berhasil disimpan");
         }
         return await interaction.reply("Lu Sapa Anj!");
     }
