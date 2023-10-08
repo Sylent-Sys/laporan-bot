@@ -22,12 +22,12 @@ model User {
 }
 
 model Series {
-  id            BigInt          @id @default(autoincrement())
-  discordId     String          @unique
+  id            BigInt         @id @default(autoincrement())
+  discordId     String         @unique
   nama          String
   singkatan     String
   Laporan       Laporan[]
-  PaymentAmount PaymentAmount[]
+  PaymentAmount PaymentAmount?
 }
 
 model Laporan {
@@ -55,10 +55,10 @@ model PaymentAmount {
 }
 
 model LaporanJob {
-  id            BigInt          @id @default(autoincrement())
+  id            BigInt         @id @default(autoincrement())
   nama          String
   Laporan       Laporan[]
-  PaymentAmount PaymentAmount[]
+  PaymentAmount PaymentAmount?
 }
 
 enum LaporanStatus {
