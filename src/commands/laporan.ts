@@ -49,14 +49,16 @@ export class Laporan {
         interaction: CommandInteraction
     ) {
         if (await this.userService.userHasRole('staff', interaction.user.id, interaction) == true) {
-            await this.userService.checkUserExistByDiscordId(interaction.user.id)
-            await this.laporanService.add({
+            await this.userService.checkUserExistByDiscordId(interaction.user.id, interaction.user.globalName ?? "", interaction.user.displayName, interaction.user.username)
+            if (await this.laporanService.add({
                 tagSeries,
                 jobs,
                 chapter,
                 discordId: interaction.user.id,
                 status: status as LaporanStatus
-            })
+            }) == false) {
+                return await interaction.reply("Job yang anda tulis tidak terdaftar");
+            }
             return await interaction.reply("Sukses Membuat Laporan");
         }
         return await interaction.reply("Lu Sapa Anj!");

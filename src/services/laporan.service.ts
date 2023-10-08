@@ -11,6 +11,9 @@ export default class LaporanService {
                 nama: jobs
             }
         })
+        if(laporanJob == undefined) {
+            return false
+        }
         const series = await this.prismaService.series.upsert({
             where: {
                 discordId: tagSeries.id
@@ -32,5 +35,6 @@ export default class LaporanService {
                 userId: user?.id ?? 0
             },
         })
+        return true
     }
 }
