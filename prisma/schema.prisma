@@ -47,8 +47,8 @@ model Laporan {
 
 model PaymentAmount {
   id           BigInt     @id @default(autoincrement())
-  laporanJobId BigInt
-  seriesId     BigInt
+  laporanJobId BigInt     @unique
+  seriesId     BigInt     @unique
   value        String
   laporanJob   LaporanJob @relation(fields: [laporanJobId], references: [id])
   series       Series     @relation(fields: [seriesId], references: [id])
