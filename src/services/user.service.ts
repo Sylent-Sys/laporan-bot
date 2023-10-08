@@ -3,12 +3,24 @@ import PrismaService from "./prisma.service";
 
 export default class UserService {
     constructor(private prismaService: PrismaService = new PrismaService()) { }
-    async add(discordId: string) {
-        await this.prismaService.user.create({
-            data: {
+    async upsert(discordId: string, globalName: string, displayName: string, username: string) {
+        return await this.prismaService.user.upsert({
+            create: {
                 discordId,
+                displayName,
+                globalName,
+                username,
                 paymentCredential: "",
                 paymentMethod: ""
+            },
+            update: {
+                discordId,
+                displayName,
+                globalName,
+                username
+            },
+            where: {
+                discordId
             }
         })
     }
@@ -27,10 +39,12 @@ export default class UserService {
         }
         return false
     }
-    async checkUserExistByDiscordId(discordId: string) {
-        const user = this.getByDiscordId(discordId)
-        if (user == undefined) {
-            await this.add(discordId)
+    async checkUserExistByDiscordId(discordId: string, globalName: string, displayName: string, username: string) {
+        const user = await this.getByDiscordId(discordId)
+        if (user == undefined || user == null) {
+            const user = await this.upsert(discordId, globalName, displayName, username)
+            return user
         }
+        return user
     }
 }
