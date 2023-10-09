@@ -41,13 +41,16 @@ export default class LaporanService {
       update: {}
     });
     const user = await this.userService.getByDiscordId(discordId);
+    if (user == undefined) {
+      return false;
+    }
     await this.prismaService.laporan.create({
       data: {
         chapter,
         status,
-        laporanJobId: laporanJob?.id ?? 0,
-        seriesId: series?.id ?? 0,
-        userId: user?.id ?? 0
+        laporanJobId: laporanJob.id,
+        seriesId: series.id,
+        userId: user.id
       }
     });
     return true;

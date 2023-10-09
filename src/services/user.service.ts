@@ -36,11 +36,11 @@ export default class UserService {
       }
     });
   }
-  async userHasRole(
+  userHasRole(
     roleName: string,
     discordId: string,
     interaction: CommandInteraction
-  ): Promise<boolean> {
+  ): boolean {
     const role = interaction.guild?.roles.cache.find((r) =>
       r.name.toLowerCase().includes(roleName)
     ) ?? { id: '' };
@@ -57,7 +57,7 @@ export default class UserService {
     username: string
   ) {
     const user = await this.getByDiscordId(discordId);
-    if (user == undefined || user == null) {
+    if (user == undefined) {
       const user = await this.upsert(
         discordId,
         globalName,

@@ -34,19 +34,19 @@ bot.on('interactionCreate', (interaction: Interaction) => {
   bot.executeInteraction(interaction);
 });
 
-bot.on('messageCreate', (message: Message) => {
-  bot.executeCommand(message);
+bot.on('messageCreate', async (message: Message) => {
+  await bot.executeCommand(message);
 });
 
 async function run() {
   await importx(`${dirname(import.meta.url)}/{events,commands}/**/*.{ts,js}`);
-  if (!EnvService.get('BOT_TOKEN')) {
+  if (!new EnvService().get('BOT_TOKEN')) {
     throw Error('Could not find BOT_TOKEN in your environment');
   }
-  await bot.login(EnvService.get('BOT_TOKEN') ?? '');
-  app.listen(EnvService.get('PORT') ?? 3000, () => {
+  await bot.login(new EnvService().get('BOT_TOKEN') ?? '');
+  app.listen(new EnvService().get('PORT') ?? 3000, () => {
     console.log('Server is running on port 3000');
   });
 }
 
-run();
+await run();

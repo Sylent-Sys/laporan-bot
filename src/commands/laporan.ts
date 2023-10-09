@@ -13,7 +13,7 @@ export class Laporan {
     private laporanService: LaporanService = new LaporanService()
   ) {}
   @Slash({ description: 'lapor' })
-  @Guild(EnvService.get('GUILD_ID') as string)
+  @Guild(new EnvService().get('GUILD_ID') ?? '')
   async lapor(
     @SlashOption({
       name: 'tag_series',
@@ -60,11 +60,7 @@ export class Laporan {
     interaction: CommandInteraction
   ) {
     if (
-      (await this.userService.userHasRole(
-        'staff',
-        interaction.user.id,
-        interaction
-      )) == true
+      this.userService.userHasRole('staff', interaction.user.id, interaction)
     ) {
       await this.userService.checkUserExistByDiscordId(
         interaction.user.id,
@@ -73,13 +69,13 @@ export class Laporan {
         interaction.user.username
       );
       if (
-        (await this.laporanService.add({
+        !(await this.laporanService.add({
           tagSeries,
           jobs,
           chapter: chapter.toString(),
           discordId: interaction.user.id,
           status: status as LaporanStatus
-        })) == false
+        }))
       ) {
         return await interaction.reply('Job yang anda tulis tidak terdaftar');
       }
