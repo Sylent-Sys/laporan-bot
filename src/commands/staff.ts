@@ -135,12 +135,14 @@ Payment Method: [${
   async edit_payment(
     @SlashOption({
       name: 'payment_credential',
+      required: true,
       type: ApplicationCommandOptionType.String,
       description: 'Payment Credential -> XXXX XXXX XXXX XXXX'
     })
     paymentCredential: string | undefined,
     @SlashOption({
       name: 'payment_method',
+      required: true,
       type: ApplicationCommandOptionType.String,
       description: 'Payment Method -> paypal, dana, ovo, gopay, linkaja, etc'
     })
