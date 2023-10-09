@@ -32,7 +32,7 @@ export default class UserService {
         })
     }
     async userHasRole(roleName: string, discordId: string, interaction: CommandInteraction): Promise<boolean> {
-        const role = interaction.guild?.roles.cache.find(r => r.name.toLowerCase().search(roleName)) ?? { id: "" };
+        const role = interaction.guild?.roles.cache.find(r => r.name.toLowerCase().includes(roleName)) ?? { id: "" };
         const member = interaction.guild?.members.cache.get(discordId);
         if (member?.roles.cache.has(role.id)) {
             return true
