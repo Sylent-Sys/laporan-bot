@@ -1,5 +1,5 @@
 import { CommandInteraction } from "discord.js";
-import PrismaService from "./prisma.service";
+import PrismaService from "./prisma.service.js";
 
 export default class UserService {
     constructor(private prismaService: PrismaService = new PrismaService()) { }

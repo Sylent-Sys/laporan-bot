@@ -5,8 +5,9 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "start": "",
+    "start": "node build/src/index.js",
     "start:dev": "nodemon --exec tsx src/index.ts",
+    "build": "tsc",
     "migrate:dev": "prisma migrate dev",
     "migrate:reset": "prisma migrate reset",
     "migrate:deploy": "prisma migrate deploy",

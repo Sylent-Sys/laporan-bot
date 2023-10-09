@@ -2,9 +2,9 @@ import type { CommandInteraction, Role } from "discord.js";
 import { ApplicationCommandOptionType } from "discord.js";
 import { Discord, Guild, Slash, SlashChoice, SlashOption } from "discordx";
 import { LaporanStatus } from "@prisma/client";
-import EnvService from "../services/env.service";
-import UserService from "../services/user.service";
-import LaporanService from "../services/laporan.service";
+import EnvService from "../services/env.service.js";
+import UserService from "../services/user.service.js";
+import LaporanService from "../services/laporan.service.js";
 
 @Discord()
 export class Laporan {

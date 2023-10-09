@@ -1,6 +1,6 @@
 import { LaporanStatus } from "@prisma/client";
-import PrismaService from "./prisma.service";
-import UserService from "./user.service";
+import PrismaService from "./prisma.service.js";
+import UserService from "./user.service.js";
 import { Role } from "discord.js";
 
 export default class LaporanService {
@@ -11,7 +11,7 @@ export default class LaporanService {
                 nama: jobs
             }
         })
-        if(laporanJob == undefined) {
+        if (laporanJob == undefined) {
             return false
         }
         const series = await this.prismaService.series.upsert({
@@ -36,5 +36,23 @@ export default class LaporanService {
             },
         })
         return true
+    }
+    async getLaporan(userId: bigint | number) {
+        let laporan = await this.prismaService.laporan.findMany({
+            where: {
+                userId,
+                paymentDone: false,
+                status: "DONE"
+            },
+            include: {
+                series: true,
+                laporanJob: {
+                    include: {
+                        PaymentAmount: true
+                    }
+                }
+            }
+        })
+        return laporan
     }
 }

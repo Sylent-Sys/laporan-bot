@@ -2,8 +2,8 @@ import { dirname, importx } from "@discordx/importer";
 import type { Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
-import EnvService from "./services/env.service";
-import app from "./server";
+import EnvService from "./services/env.service.js";
+import app from "./server.js";
 
 export const bot = new Client({
     botGuilds: [(client) => client.guilds.cache.map((guild) => guild.id)],
