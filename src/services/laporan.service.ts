@@ -53,7 +53,7 @@ export default class LaporanService {
     return true;
   }
   async getLaporan(userId: bigint | number) {
-    let laporan = await this.prismaService.laporan.findMany({
+    const laporan = await this.prismaService.laporan.findMany({
       where: {
         userId,
         paymentDone: false,
