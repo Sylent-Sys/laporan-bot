@@ -77,7 +77,9 @@ export class Laporan {
           status: status as LaporanStatus
         }))
       ) {
-        return await interaction.reply('Job yang anda tulis tidak terdaftar atau unexpected error! ehe~');
+        return await interaction.reply(
+          'Job yang anda tulis tidak terdaftar atau unexpected error! ehe~'
+        );
       }
       return await interaction.reply('Laporan berhasil disimpan');
     }

@@ -29,6 +29,21 @@ export default class UserService {
       }
     });
   }
+  async updatePaymentCredential(
+    discordId: string,
+    paymentCredential: string,
+    paymentMethod: string
+  ) {
+    return await this.prismaService.user.update({
+      data: {
+        paymentCredential,
+        paymentMethod
+      },
+      where: {
+        discordId
+      }
+    });
+  }
   async getByDiscordId(discordId: string) {
     return await this.prismaService.user.findFirst({
       where: {
