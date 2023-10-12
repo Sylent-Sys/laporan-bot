@@ -1,0 +1,33 @@
+version: '3'
+services:
+  app:
+    build: ./
+    ports:
+      - "3000:3000"
+      - "5555:5555"
+    depends_on:
+      - db
+  db:
+    image: mariadb:11.1.2
+    restart: always
+    ports:
+      - "3306:3306"
+    command: --lower-case-table-names=1
+    environment:
+      MARIADB_ROOT_PASSWORD: secret
+      MARIADB_USER: db_user
+      MARIADB_PASSWORD: secret
+      MARIADB_DATABASE: laporan-bot
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "8080:80"
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_USER: db_user
+      PMA_PASSWORD: secret
+    depends_on:
+      - db
+networks:
+  db:
+    driver: bridge
