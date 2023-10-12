@@ -1,4 +1,4 @@
-FROM node:20.8.0
+FROM node:20.8.0-slim
 WORKDIR /usr/src/app
 ENV GUILD_ID="1157549548684713994"
 ENV ADMIN_ROLE_NAME="admin"
